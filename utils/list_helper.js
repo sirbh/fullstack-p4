@@ -11,21 +11,60 @@ const totalLikes = (blogs) => {
 };
 
 const favoriteBlog = (blogs) => {
-    if(blogs.length===0) return null
+  if (blogs.length === 0) return null;
 
-    const favBlog = blogs.reduce((fBlog,blog)=>{
-        if(fBlog.likes<blog.likes){
-            return blog
-        }
+  const favBlog = blogs.reduce((fBlog, blog) => {
+    if (fBlog.likes < blog.likes) {
+      return blog;
+    }
 
-        return fBlog
-    },blogs[0])
+    return fBlog;
+  }, blogs[0]);
 
-    return favBlog
-}
+  return favBlog;
+};
+
+const mostBlogs = (blogs) => {
+  if (blogs.length === 0) return null;
+
+  const authorMap = blogs.reduce((authorMap, blog) => {
+    if (authorMap[blog.author]) {
+      authorMap[blog.author] = authorMap[blog.author] + 1;
+    } else {
+      authorMap[blog.author] = 1;
+    }
+
+    return authorMap;
+  }, {});
+
+  console.log(authorMap);
+
+  const authors = Object.keys(authorMap);
+
+  const popularAuthor = authors.reduce(
+    (popularAuthor, author) => {
+      if (popularAuthor.blogs < authorMap[author]) {
+        return {
+          author: author,
+          blogs: authorMap[author],
+        };
+      }
+      return popularAuthor;
+    },
+    {
+      author: authors[0],
+      blogs: authorMap[authors[0]],
+    }
+  );
+
+  console.log(popularAuthor);
+
+  return popularAuthor;
+};
 
 module.exports = {
   dummy,
   totalLikes,
-  favoriteBlog
+  favoriteBlog,
+  mostBlogs,
 };
