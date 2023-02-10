@@ -37,7 +37,6 @@ const mostBlogs = (blogs) => {
     return authorMap;
   }, {});
 
-  console.log(authorMap);
 
   const authors = Object.keys(authorMap);
 
@@ -57,14 +56,52 @@ const mostBlogs = (blogs) => {
     }
   );
 
-  console.log(popularAuthor);
-
   return popularAuthor;
 };
+
+const mostLikes = (blogs)=>{
+    if(blogs.length===0) {
+        return null
+    }
+    const authorLikesMap = blogs.reduce((authorLikesMap,blog)=>{
+        if(authorLikesMap[blog.author]){
+            authorLikesMap[blog.author] = authorLikesMap[blog.author] + blog.likes
+        } else {
+            authorLikesMap[blog.author] = blog.likes
+        }
+
+        return authorLikesMap
+    },{})
+
+    console.log(authorLikesMap)
+
+    const authors = Object.keys(authorLikesMap);
+
+    const popularAuthor = authors.reduce(
+        (popularAuthor, author) => {
+          if (popularAuthor.likes < authorLikesMap[author]) {
+            return {
+              author: author,
+              likes: authorLikesMap[author],
+            };
+          }
+          return popularAuthor;
+        },
+        {
+          author: authors[0],
+          likes: authorLikesMap[authors[0]],
+        }
+      );
+
+      console.log(popularAuthor)
+    
+      return popularAuthor;
+}
 
 module.exports = {
   dummy,
   totalLikes,
   favoriteBlog,
   mostBlogs,
+  mostLikes
 };

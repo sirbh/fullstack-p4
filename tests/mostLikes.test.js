@@ -1,6 +1,6 @@
 const listHelper = require("../utils/list_helper");
 
-describe("mostblogs", () => {
+describe("mostLikes", () => {
   const blogWithOnePost = [
     {
       _id: "5a422a851b54a676234d17f7",
@@ -64,23 +64,23 @@ describe("mostblogs", () => {
     },
   ];
   test("blog with one post", () => {
-    const result = listHelper.mostBlogs(blogWithOnePost);
+    const result = listHelper.mostLikes(blogWithOnePost);
     expect(result).toEqual({
       author: "Michael Chan",
-      blogs: 1,
+      likes: 7,
     });
   });
 
   test("blog with 0 post", () => {
-    const result = listHelper.mostBlogs(blogWithNoPost);
+    const result = listHelper.mostLikes(blogWithNoPost);
     expect(result).toEqual(null);
   });
 
   test("blog with multiple post", () => {
-    const result = listHelper.mostBlogs(blogWithMultiplePost);
+    const result = listHelper.mostLikes(blogWithMultiplePost);
     expect(result).toEqual({
-      author: "Robert C. Martin",
-      blogs: 3,
+      author: "Edsger W. Dijkstra",
+      likes: 17,
     });
   });
 });
