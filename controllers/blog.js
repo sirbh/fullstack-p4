@@ -48,7 +48,6 @@ blogRouter.put("/:id", userExtractor, async (request, response) => {
     new: true,
     runValidators: true,
   });
-  console.log(updatedblog);
   if (updatedblog) {
     return response.json(updatedblog);
   } else {

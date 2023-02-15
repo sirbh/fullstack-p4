@@ -179,7 +179,6 @@ describe("update blog", () => {
       likes: 14,
     };
 
-    console.log(updatedBlog);
 
     const response = await api
       .put(`/api/blogs/${helper["blogWithOnePost"][0]._id}`)
